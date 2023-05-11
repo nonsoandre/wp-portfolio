@@ -27,11 +27,16 @@
         <div class="site-header__menu group">
           <nav class="main-navigation">
             <ul>
-              <li><a href="<?php echo site_url("/about-us"); //the site_url function calls the root of your webiste path ?>">About Us</a></li>
+<?php 
+    wp_nav_menu(array(
+        "theme_location" => "header_menu_location"
+    ));
+?>
+              <!-- <li><a href="<?php echo site_url("/about-us"); //the site_url function calls the root of your webiste path ?>">About Us</a></li>
               <li><a href="#">Programs</a></li>
               <li><a href="#">Events</a></li>
               <li><a href="#">Campuses</a></li>
-              <li><a href="#">Blog</a></li>
+              <li><a href="#">Blog</a></li> -->
             </ul>
           </nav>
           <div class="site-header__util">

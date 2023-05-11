@@ -18,6 +18,10 @@ add_action("wp_enqueue_scripts", "portfolioFiles");
  
 function portfolio_features(){
     add_theme_support("title-tag"); //this adds dynamic page titles based on generated titles from the dashboard
+    register_nav_menu("footer_location_1", "Footer Location 1");
+    register_nav_menu("footer_location_2", "Footer Location 2");
+    register_nav_menu("header_menu_location", "Header Navigation Menu"); //this register a location on wordpress on where a user can create and add menu items
+
 }
 
 add_action("after_setup_theme", "portfolio_features"); // this function helps certain feature like page title tags etc
