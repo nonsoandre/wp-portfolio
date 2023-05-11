@@ -15,4 +15,11 @@ function portfolioFiles(){
 
 add_action("wp_enqueue_scripts", "portfolioFiles");
 
+ 
+function portfolio_features(){
+    add_theme_support("title-tag"); //this adds dynamic page titles based on generated titles from the dashboard
+}
+
+add_action("after_setup_theme", "portfolio_features"); // this function helps certain feature like page title tags etc
+
 ?> 
