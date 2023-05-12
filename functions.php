@@ -7,6 +7,7 @@ function portfolioFiles(){
 
     wp_enqueue_style("index-css", get_template_directory_uri()."/assets/build/index.css");
     wp_enqueue_style("style-index-css", get_template_directory_uri()."/assets/build/style-index.css");
+    wp_enqueue_style("my-css", get_template_directory_uri()."/assets/build/my.css");
     
     wp_enqueue_script("main.js", get_theme_file_uri("/assets/build/index.js"), array("jquery"), "1.0", true);
 
