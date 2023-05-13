@@ -14,6 +14,8 @@
     </div>
 
 <!-- Website posts content -->
+
+    <!-- Split One -->
     <div class="full-width-split group">
       <div class="full-width-split__one">
         <div class="full-width-split__inner">
@@ -43,21 +45,36 @@
           <p class="t-center no-margin"><a href="#" class="btn btn--blue">View All Events</a></p>
         </div>
       </div>
+
+
+      <!-- Split Two -->
       <div class="full-width-split__two">
         <div class="full-width-split__inner">
           <h2 class="headline headline--small-plus t-center">From Our Blogs</h2>
+<?php
+    // initializing custom query
+    $homepageCustomQueryForPosts = new WP_Query(array(
+        "posts_per_page" => 2
+    ));
 
+    while($homepageCustomQueryForPosts->have_posts(  )) {
+        $homepageCustomQueryForPosts->the_post();    //prepares all the data
+?>
           <div class="event-summary">
             <a class="event-summary__date event-summary__date--beige t-center" href="#">
-              <span class="event-summary__month">Jan</span>
-              <span class="event-summary__day">20</span>
+              <span class="event-summary__month"><?php the_time("M"); ?></span>
+              <span class="event-summary__day"><?php the_time("d"); ?></span>
             </a>
             <div class="event-summary__content">
-              <h5 class="event-summary__title headline headline--tiny"><a href="#">We Were Voted Best School</a></h5>
-              <p>For the 100th year in a row we are voted #1. <a href="#" class="nu gray">Read more</a></p>
+              <h5 class="event-summary__title headline headline--tiny"><a href="<?php echo get_the_permalink(); ?>"><?php the_title(); ?></a></h5>
+              <p><?php  echo wp_trim_words(get_the_excerpt(), 18); ?>. <a href="<?php echo get_the_permalink(); ?>" class="nu gray">Read more</a></p>
             </div>
           </div>
-          <div class="event-summary">
+<?php 
+    }; wp_reset_query();
+?>
+
+          <!-- <div class="event-summary">
             <a class="event-summary__date event-summary__date--beige t-center" href="#">
               <span class="event-summary__month">Feb</span>
               <span class="event-summary__day">04</span>
@@ -66,7 +83,7 @@
               <h5 class="event-summary__title headline headline--tiny"><a href="#">Professors in the National Spotlight</a></h5>
               <p>Two of our professors have been in national news lately. <a href="#" class="nu gray">Read more</a></p>
             </div>
-          </div>
+          </div> -->
 
           <p class="t-center no-margin"><a href="#" class="btn btn--yellow">View All Blog Posts</a></p>
         </div>
