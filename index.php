@@ -30,8 +30,11 @@
     </div>
 
 
-<?php
-    }
+<?php } ?>
+
+<?php 
+    // wp-pagination
+    echo paginate_links();
 
 ?>
     </div>
