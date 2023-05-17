@@ -25,4 +25,8 @@ function portfolio_features(){
 
 add_action("after_setup_theme", "portfolio_features"); // this function helps certain feature like page title tags etc
 
+
+
+
+
 ?> 
