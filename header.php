@@ -20,7 +20,7 @@
 <header class="site-header">
       <div class="container">
         <h1 class="school-logo-text float-left">
-          <a href="<?php echo site_url(); ?>"><strong>Fictional</strong> University</a>
+          <a href="<?php echo site_url(); ?>"><strong>Andre's</strong> Portfolios</a>
         </h1>
         <span class="js-search-trigger site-header__search-trigger"><i class="fa fa-search" aria-hidden="true"></i></span>
         <i class="site-header__menu-trigger fa fa-bars" aria-hidden="true"></i>
@@ -36,7 +36,7 @@
               <li><a href="#">Programs</a></li>
               <li><a href="#">Events</a></li>
               <li><a href="#">Campuses</a></li>
-              <li><a href="#">Blog</a></li>
+              <li <?php if (get_post_type() == "post") echo "class='current-menu-item'";  ?>><a href="<?php echo site_url("/blog")?>">Blog</a></li>
             </ul>
           </nav>
           <div class="site-header__util">
