@@ -74,7 +74,7 @@ $pastEventPageCustomQueryForEvents = new WP_Query(array(
 <?php } ?>
 
 <?php 
-    // wp-pagination
+    // wp-pagination --> how to setup for custom queries
     echo paginate_links(array(
         'total' => $pastEventPageCustomQueryForEvents->max_num_pages
     ));
