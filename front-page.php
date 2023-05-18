@@ -25,7 +25,17 @@
 
     $homePageCustomQueryForEvents = new WP_Query(array(
       "post_type" => "event",
-      "posts_per_page" => 2
+      "posts_per_page" => 2,
+      "meta_key" => "event_date",
+      "orderby" => 'meta_value_num',
+      "order" => "ASC",
+      "meta_query" => array(
+        array(
+          "key" => "event_date",
+          "compare" => ">=",
+          "value" => date("Ymd")
+        )
+      )
     ));
 
 
