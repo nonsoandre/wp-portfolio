@@ -1,6 +1,5 @@
 <?php get_header(); 
 
-
 while(have_posts()) {
     the_post();
 ?>
@@ -22,31 +21,32 @@ while(have_posts()) {
         <!-- START META BOX INNER PAGE -->
         <div class="metabox metabox--position-up metabox--with-home-link">
             <p>
-                <a class="metabox__blog-home-link" href="<?php echo site_url("/events"); ?>">
+                <a class="metabox__blog-home-link" href="<?php echo get_post_type_archive_link( "project" ); ?>">
                     <i class="fa fa-home" aria-hidden="true"></i> 
-                    Events Home
+                    All Programs
                 </a> 
-                <span class="metabox__main"><?php the_title(); ?></span>
+                <!-- <span class="metabox__main">Posted by <?php the_author_posts_link();?> on <?php the_time("n,j,y"); echo " in "; echo get_the_category_list(", "); ?></span> -->
             </p>
         </div>
         <!-- END META BOX INNER PAGE  -->
         <div class="generic-content">
             <?php the_content(); ?>
         </div> 
-        <div class="related-programs">
-            <hr class="section-break">
-            <h2>Related Program(s)</h2>
-            <ul class="link-list min-list">
-    <?php 
-        $relatedPrograms = get_field('related_programs');
+    </div>
 
-        if($relatedPrograms) {
-            foreach($relatedPrograms as $programs){ ?>
-            <li><a href="<?php echo get_the_permalink($programs); ?>"><?php echo get_the_title($programs); ?></a></li>
-    <?php } } ?>
-            </ul>
-        </div>
 
-</div>
 
-<?php } get_footer(); ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?php } get_footer(); ?>`

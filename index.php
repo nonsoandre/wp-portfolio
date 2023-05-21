@@ -1,5 +1,6 @@
 <?php get_header(); ?>
 
+
 <!-- PAGE BANNER START -->
     <div class="page-banner">
         <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri("/assets/images/ocean.jpg") ?>)"></div>
