@@ -25,8 +25,14 @@ function portfolio_features(){
 
 add_action("after_setup_theme", "portfolio_features"); // this function helps certain feature like page title tags etc
 
+// handling post-type queries
+function university_adjust_queries($query) {
+    if (!is_admin() AND is_post_type_archive('project') AND is_main_query()){
 
+    }
+}
 
+add_action('pre_get_posts', 'university_adjust_queries')
 
 
 ?> 

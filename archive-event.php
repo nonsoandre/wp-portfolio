@@ -69,8 +69,8 @@
     echo paginate_links();
 
 ?>
-    <hr class="section-break">
-    <p>Looking for a past event recap? Checkout our past event archive <a href="<?php echo site_url("/past-events"); ?>">Past Events</a></p>
+        <hr class="section-break">
+        <p>Looking for a past event recap? Checkout our past event archive <a href="<?php echo site_url("/past-events"); ?>">Past Events</a></p>
     </div>
 
 
