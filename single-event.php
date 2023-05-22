@@ -34,13 +34,13 @@ while(have_posts()) {
             <?php the_content(); ?>
         </div> 
         <div class="related-programs">
-            <hr class="section-break">
-            <h2>Related Program(s)</h2>
-            <ul class="link-list min-list">
     <?php 
         $relatedPrograms = get_field('related_programs');
 
         if($relatedPrograms) {
+            echo '<hr class="section-break">
+            <h2>Related Program(s)</h2>
+            <ul class="link-list min-list">';
             foreach($relatedPrograms as $programs){ ?>
             <li><a href="<?php echo get_the_permalink($programs); ?>"><?php echo get_the_title($programs); ?></a></li>
     <?php } } ?>

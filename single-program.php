@@ -33,9 +33,7 @@ while(have_posts()) {
             <?php the_content(); ?>
         </div> 
 
-        <div class="related-programs">
-            <hr class="section-break">
-            <h2>Related Event(s)</h2>
+        <div class="related-programs">          <!-- <h2>Related Event(s)</h2> -->
 
 <?php 
 $pastEventPageCustomQueryForEvents = new WP_Query(array(
@@ -58,6 +56,12 @@ $pastEventPageCustomQueryForEvents = new WP_Query(array(
       )
     )
   ));
+
+  if($pastEventPageCustomQueryForEvents->have_posts()){
+
+    echo '<hr class="section-break">';
+    echo "<h2>Upcoming " . get_the_title() . " Events</h2>";
+ 
     // looping in wordpress
     while($pastEventPageCustomQueryForEvents->have_posts()) {
         $pastEventPageCustomQueryForEvents->the_post();
@@ -88,7 +92,7 @@ $pastEventPageCustomQueryForEvents = new WP_Query(array(
             </div>
           </div>
 
-<?php } ?>
+<?php }   }?>
 
 <?php 
     // wp-pagination --> how to setup for custom queries
