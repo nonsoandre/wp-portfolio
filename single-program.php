@@ -36,6 +36,39 @@ while(have_posts()) {
         <div class="related-programs">          <!-- <h2>Related Event(s)</h2> -->
 
 <?php 
+
+$relatedProfessorCQ = new WP_Query(array(
+    "post_type" => "professor",
+    "posts_per_page" => -1,
+    "orderby" => 'title',
+    "order" => "ASC",
+    "meta_query" => array(
+      array(
+        "key" => "related_programs", //post type name you want to work on
+        "compare" => "LIKE",
+        "value" => '"' . get_the_ID() . '"'
+      )
+    )
+  ));
+
+  if($relatedProfessorCQ->have_posts()){
+
+    echo '<hr class="section-break">';
+    echo "<h2 class='headline headline--medium'>Professors</h2>";
+    echo "<ul class='link-list min-list'>";
+ 
+    // looping in wordpress
+    while($relatedProfessorCQ->have_posts()) {
+        $relatedProfessorCQ->the_post();
+
+?>
+        <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+
+<?php }   };
+echo "</ul>";
+wp_reset_postdata();
+?>
+<?php 
 $pastEventPageCustomQueryForEvents = new WP_Query(array(
     "paged" => get_query_var('paged', 1),
     "post_type" => "event",
