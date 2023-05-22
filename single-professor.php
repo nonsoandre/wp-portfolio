@@ -20,7 +20,7 @@ while(have_posts()) {
 
     <div class="container container--narrow page-section">    
         <!-- START META BOX INNER PAGE -->
-        <div class="metabox metabox--position-up metabox--with-home-link">
+        <!-- <div class="metabox metabox--position-up metabox--with-home-link">
             <p>
                 <a class="metabox__blog-home-link" href="<?php echo site_url("/events"); ?>">
                     <i class="fa fa-home" aria-hidden="true"></i> 
@@ -28,7 +28,7 @@ while(have_posts()) {
                 </a> 
                 <span class="metabox__main"><?php the_title(); ?></span>
             </p>
-        </div>
+        </div> -->
         <!-- END META BOX INNER PAGE  -->
         <div class="generic-content">
             <?php the_content(); ?>
@@ -39,7 +39,7 @@ while(have_posts()) {
 
         if($relatedPrograms) {
             echo '<hr class="section-break">
-            <h2>Related Program(s)</h2>
+            <h2>Subject(s) Taught</h2>
             <ul class="link-list min-list">';
             foreach($relatedPrograms as $programs){ ?>
             <li><a href="<?php echo get_the_permalink($programs); ?>"><?php echo get_the_title($programs); ?></a></li>
