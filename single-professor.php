@@ -32,7 +32,7 @@ while(have_posts()) {
         <!-- END META BOX INNER PAGE  -->
         <div class="generic-content">
             <div class="row group">
-                <div class="one-third"><?php the_post_thumbnail(); ?></div>
+                <div class="one-third"><?php the_post_thumbnail('prof_big'); ?></div>
                 <div class="two-third"><?php the_content(); ?></div>
             </div>
             
