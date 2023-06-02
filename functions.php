@@ -17,6 +17,9 @@ add_action("wp_enqueue_scripts", "portfolioFiles");
  
 function portfolio_features(){
     add_theme_support("title-tag"); //this adds dynamic page titles based on generated titles from the dashboard
+    add_theme_support("post-thumbnails");
+    add_image_size( 'prof_small', 400, 250, true );
+    add_image_size('prof_big', 480, 650, true);
     register_nav_menu("footer_location_1", "Footer Location 1");
     register_nav_menu("footer_location_2", "Footer Location 2");
     register_nav_menu("header_menu_location", "Header Navigation Menu"); //this register a location on wordpress on where a user can create and add menu items
@@ -34,7 +37,37 @@ function university_adjust_queries($query) {
     }
 }
 
-add_action('pre_get_posts', 'university_adjust_queries')
+add_action('pre_get_posts', 'university_adjust_queries');
 
 
+
+function pageBannerTemplate ($args = NULL){
+    if(!$args['title']){
+        $args['title'] = get_the_title();
+    };
+
+    if(!$args['subtitle']){
+        $args['subtitle'] = get_field('page_banner_subtitle');
+    };
+
+    if(!$args['photo']){
+        if(get_field('page_cover_image')){
+            $args['photo'] = get_field('page_cover_image')['url'];
+        }else{
+            $args['photo'] = get_theme_file_uri("/assets/images/ocean.jpg");
+        }
+    }
+?>
+    <div class="page-banner">
+        <div class="page-banner__bg-image" style="background-image: url(<?php echo $args['photo']; ?>)"></div>
+        <div class="page-banner__content container container--narrow">
+            <h1 class="page-banner__title"><?php $args['title']; ?></h1>
+            <div class="page-banner__intro">
+            <p><?php $args[subtitle]; ?> </p>
+            </div>
+        </div>
+    </div>
+
+<?php
+}
 ?> 
