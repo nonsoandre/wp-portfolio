@@ -1,6 +1,14 @@
-<?php get_header(); ?>
+<?php get_header(); 
 
-<!-- PAGE BANNER START -->
+// calling the page banner template
+pageBannerTemplate(array(
+    'title' => get_the_archive_title(),
+     'subtitle' => get_the_archive_description(),
+     'photo' => ''
+));
+?>
+
+<!-- PAGE BANNER START
     <div class="page-banner">
         <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri("/assets/images/ocean.jpg") ?>)"></div>
         <div class="page-banner__content container container--narrow">
@@ -13,24 +21,24 @@
                     // if(is_author()) {
                     //     echo "Posts by "; the_author();
                     // }
-                    the_archive_title();
+                    // the_archive_title();
                 ?>
             </h1>
             <div class="page-banner__intro">
                 <p>All posts 
                     <?php                     
-                        if(is_category()) {
-                            echo "for "; single_cat_title();
-                        }elseif (is_author()) {
-                            echo " by "; the_author();
-                        }else{
-                            the_archive_description();
-                        }
+                        // if(is_category()) {
+                        //     echo "for "; single_cat_title();
+                        // }elseif (is_author()) {
+                        //     echo " by "; the_author();
+                        // }else{
+                        //     the_archive_description();
+                        // }
                     ?>
                 </p> 
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="container container--narrow page-section">
 <?php 

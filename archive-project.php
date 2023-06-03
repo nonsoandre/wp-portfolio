@@ -1,4 +1,13 @@
-<?php get_header(); ?>
+<?php get_header(); 
+
+// calling the page banner template
+pageBannerTemplate(array(
+    'title' => 'All Projects',
+     'subtitle' => 'Latest Projects done by me',
+     'photo' => ''
+));
+
+?>
 
 <!-- PAGE BANNER START -->
     <div class="page-banner">
