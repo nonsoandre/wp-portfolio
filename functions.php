@@ -40,8 +40,18 @@ function university_adjust_queries($query) {
 add_action('pre_get_posts', 'university_adjust_queries');
 
 
+//  creating functional template part
+function pageBannerTemplate ($args = NULL){ 
 
-function pageBannerTemplate ($args = NULL){
+    // so it happens that without this code, a php error is thrown that says the array values are empty but then still goes ahead to work with the code. This line of code below prevents this error from being thrown for cases where the function is ran without an arguement.
+    if(!$args){
+        $args = array(
+            'title' => '',
+            'subtitle' => '',
+            'photo' => ''
+        );
+    }
+
     if(!$args['title']){
         $args['title'] = get_the_title();
     };
@@ -61,9 +71,9 @@ function pageBannerTemplate ($args = NULL){
     <div class="page-banner">
         <div class="page-banner__bg-image" style="background-image: url(<?php echo $args['photo']; ?>)"></div>
         <div class="page-banner__content container container--narrow">
-            <h1 class="page-banner__title"><?php $args['title']; ?></h1>
+            <h1 class="page-banner__title"><?php echo $args['title']; ?></h1>
             <div class="page-banner__intro">
-            <p><?php $args[subtitle]; ?> </p>
+            <p><?php echo $args["subtitle"]; ?> </p>
             </div>
         </div>
     </div>
