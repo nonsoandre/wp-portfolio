@@ -39,6 +39,14 @@ function university_adjust_queries($query) {
 
 add_action('pre_get_posts', 'university_adjust_queries');
 
+// acf maps field api connection
+// function campusMapKeys($api) {
+//     $api['key'] = 'AIzaSyDiQ6CiuZ7CC_Rb0SaCYyqzEwgT3s9a11Q';
+//     return $api;
+// }
+
+add_filter('acf/fields/google_map/api', 'campusMapKeys');
+
 
 //  creating functional template part
 function pageBannerTemplate ($args = NULL){ 
