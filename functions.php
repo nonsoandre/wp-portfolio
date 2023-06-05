@@ -3,6 +3,7 @@
 function portfolioFiles(){
     wp_enqueue_style("font-awesome", "//use.fontawesome.com/releases/v5.0.7/css/all.css");
     wp_enqueue_style("google_font", "//fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+    wp_enqueue_style("google_map", "//maps.googleapis.com/maps/api/js/AIzaSyDiQ6CiuZ7CC_Rb0SaCYyqzEwgT3s9a11Q", NULL,"1.0", true);
 
     wp_enqueue_style("index-css", get_template_directory_uri()."/assets/build/index.css");
     wp_enqueue_style("style-index-css", get_template_directory_uri()."/assets/build/style-index.css");
@@ -28,8 +29,14 @@ function portfolio_features(){
 
 add_action("after_setup_theme", "portfolio_features"); // this function helps certain feature like page title tags etc
 
-// handling post-type queries through the functions.php
+// handling post-type queries through the functions.php - allows you to customise the queries for a particular cpt
 function university_adjust_queries($query) {
+    // customizing the campus query - basically allows to have more than the default 10posts per page
+    if (!is_admin() AND is_post_type_archive('campus') AND is_main_query()){
+        $query->set('posts_per_page', -1);
+    }
+
+    // customizing the project query
     if (!is_admin() AND is_post_type_archive('project') AND is_main_query()){
         $query->set('orderby', 'title');
         $query->set('order', 'Asc');
@@ -39,9 +46,28 @@ function university_adjust_queries($query) {
 
 add_action('pre_get_posts', 'university_adjust_queries');
 
+// acf maps field api connection
+// commenting this code out will throw an error on acf in front-end
+function campusMapKeys($api) {
+    $api['key'] = 'AIzaSyDiQ6CiuZ7CC_Rb0SaCYyqzEwgT3s9a11Q';
+    return $api;
+}
+
+add_filter('acf/fields/google_map/api', 'campusMapKeys');
 
 
-function pageBannerTemplate ($args = NULL){
+//  creating functional template part
+function pageBannerTemplate ($args = NULL){ 
+
+    // so it happens that without this code, a php error is thrown that says the array values are empty but then still goes ahead to work with the code. This line of code below prevents this error from being thrown for cases where the function is ran without an arguement.
+    if(!$args){
+        $args = array(
+            'title' => '',
+            'subtitle' => '',
+            'photo' => ''
+        );
+    }
+
     if(!$args['title']){
         $args['title'] = get_the_title();
     };
@@ -61,9 +87,9 @@ function pageBannerTemplate ($args = NULL){
     <div class="page-banner">
         <div class="page-banner__bg-image" style="background-image: url(<?php echo $args['photo']; ?>)"></div>
         <div class="page-banner__content container container--narrow">
-            <h1 class="page-banner__title"><?php $args['title']; ?></h1>
+            <h1 class="page-banner__title"><?php echo $args['title']; ?></h1>
             <div class="page-banner__intro">
-            <p><?php $args[subtitle]; ?> </p>
+            <p><?php echo $args["subtitle"]; ?> </p>
             </div>
         </div>
     </div>

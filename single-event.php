@@ -3,10 +3,16 @@
 
 while(have_posts()) {
     the_post();
+
+    pageBannerTemplate(array(
+        'title' => get_the_title(),
+         'subtitle' => "",
+         'photo' => ''
+    ));
 ?>
 
 
-    <div class="page-banner">
+    <!-- <div class="page-banner">
         <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri("/assets/images/ocean.jpg") ?>)"></div>
         <div class="page-banner__content container container--narrow">
             <h1 class="page-banner__title"><?php the_title(); ?></h1>
@@ -14,7 +20,7 @@ while(have_posts()) {
             <p>Don't forget to replace this later.</p>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
 
