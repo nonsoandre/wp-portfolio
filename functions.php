@@ -29,8 +29,14 @@ function portfolio_features(){
 
 add_action("after_setup_theme", "portfolio_features"); // this function helps certain feature like page title tags etc
 
-// handling post-type queries through the functions.php
+// handling post-type queries through the functions.php - allows you to customise the queries for a particular cpt
 function university_adjust_queries($query) {
+    // customizing the campus query - basically allows to have more than the default 10posts per page
+    if (!is_admin() AND is_post_type_archive('campus') AND is_main_query()){
+        $query->set('posts_per_page', -1);
+    }
+
+    // customizing the project query
     if (!is_admin() AND is_post_type_archive('project') AND is_main_query()){
         $query->set('orderby', 'title');
         $query->set('order', 'Asc');

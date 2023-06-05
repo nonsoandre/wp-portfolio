@@ -88,49 +88,6 @@ echo "</ul>";
 
 wp_reset_postdata();
 ?>
-<?php 
-  $pastEventPageCustomQueryForEvents = new WP_Query(array(
-    "paged" => get_query_var('paged', 1),
-    "post_type" => "event",
-    "posts_per_page" => 1,
-    "meta_key" => "event_date",
-    "orderby" => 'meta_value_num',
-    "order" => "ASC",
-    "meta_query" => array(
-      array(
-        "key" => "event_date",
-        "compare" => ">=",
-        "value" => date("Ymd")
-      ),
-      array(
-        "key" => "related_programs", //post type name you want to work on
-        "compare" => "LIKE",
-        "value" => '"' . get_the_ID() . '"'
-      )
-    )
-  ));
-
-  if($pastEventPageCustomQueryForEvents->have_posts()){
-
-    echo '<hr class="section-break">';
-    echo "<h2>Upcoming " . get_the_title() . " Events</h2>";
- 
-    // looping in wordpress
-    while($pastEventPageCustomQueryForEvents->have_posts()) {
-        $pastEventPageCustomQueryForEvents->the_post();
-
-        get_template_part( 'template-parts/content', 'events');
-    }
-  }
-?>
-
-<?php 
-    // wp-pagination --> how to setup for custom queries
-    echo paginate_links(array(
-        'total' => $pastEventPageCustomQueryForEvents->max_num_pages
-    ));
-
-?>
         </div>
     </div>
 
