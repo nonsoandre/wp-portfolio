@@ -18,24 +18,52 @@ class Search {
         //get your events here
         this.events();
 
+        //key state varianble
+        this.isOpenOverlay = false;
     }
 
     //2. events
     // your add listener events that listens for each of the elements in constructor
     events(){
         this.openBtn.addEventListener("click", this.openOverlay.bind(this));
-        this.closeBtn.addEventListener("click", this.closeOverlay.bind(this))
+        this.closeBtn.addEventListener("click", this.closeOverlay.bind(this));
+        document.addEventListener("keydown", this.keyPressDispatcher.bind(this));
+        //tiimer event
     }
     
     //3. methods
+    typingLogic() {
+
+    }
+
+    keyPressDispatcher(e) { // function to open or close search area on keypress for S and esc keys
+        if(e.keyCode == 83 && this.isOpenOverlay == false){
+            this.openOverlay();
+        }
+
+        if(e.keyCode == 27 && this.isOpenOverlay){
+            this.closeOverlay();
+        }
+
+        console.log(e.keyCode);
+    }
+
     openOverlay() {
        this.searchOverlay.classList.add("search-overlay--active");
+       document.querySelector("body").classList.add("body-no-scroll");
+       
+       // set state
+       this.isOpenOverlay = true;
     }
 
     closeOverlay() {
         // console.log(this.searchOverlay.classList);
         // console.log(this.searchOverlay);
         this.searchOverlay.classList.remove("search-overlay--active");
+        document.querySelector("body").classList.remove("body-no-scroll");
+        
+        // set state 
+        this.isOpenOverlay = false;
     }
 }
 
