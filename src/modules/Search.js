@@ -17,6 +17,12 @@ class Search {
         this.searchInputField = document.querySelector("#search-term");
         console.log(this.searchInputField);
 
+        //get result div container
+        this.resultDiv = document.querySelector(".search-overlay__results");
+        console.log(this.resultDiv);
+
+   
+
         //get your events here
         this.events();
 
@@ -24,6 +30,8 @@ class Search {
         this.isOpenOverlay = false;
         //state for timeout
         this.timerHistory;
+        //spinner state
+        this.isSpinner = false;
     }
 
     //2. events
@@ -39,11 +47,19 @@ class Search {
     //3. methods
     typingLogic() {
         clearTimeout(this.timerHistory);
+        // add spinner as soon as typing is done
+        if(!this.isSpinner) {
+            // add spinner as soon as typing is done
+               this.resultDiv.innerHTML = "<div class='spinner-loader'> </div>"        
+               this.isSpinner = true;
+           } 
         this.timerHistory = setTimeout(this.getResults.bind(this), 2000);
+
     }
 
     getResults(){
-        console.log('hello world')
+        //add the search result html structure,
+        this.resultDiv.innerHTML = "<div>Hello world</div>";
     }
 
     keyPressDispatcher(e) { // function to open or close search area on keypress for S and esc keys
@@ -51,11 +67,9 @@ class Search {
             this.openOverlay();
         }
 
-        if(e.keyCode == 27 && this.isOpenOverlay){
+        if(e.keyCode == 27 && this.isOpenOverlay){ //for esc key
             this.closeOverlay();
         }
-
-        console.log(e.keyCode);
     }
 
     openOverlay() {

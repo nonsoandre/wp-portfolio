@@ -208,12 +208,17 @@ class Search {
     //get the parent overlay class
     this.searchOverlay = document.querySelector(".search-overlay");
     /* eslint-disable */
-    console.log(...oo_oo(`86565f76_0`, this.searchOverlay.classList));
+    console.log(...oo_oo(`77671fe1_0`, this.searchOverlay.classList));
 
     //get search input field
     this.searchInputField = document.querySelector("#search-term");
     /* eslint-disable */
-    console.log(...oo_oo(`86565f76_1`, this.searchInputField));
+    console.log(...oo_oo(`77671fe1_1`, this.searchInputField));
+
+    //get result div container
+    this.resultDiv = document.querySelector(".search-overlay__results");
+    /* eslint-disable */
+    console.log(...oo_oo(`77671fe1_2`, this.resultDiv));
 
     //get your events here
     this.events();
@@ -222,6 +227,8 @@ class Search {
     this.isOpenOverlay = false;
     //state for timeout
     this.timerHistory;
+    //spinner state
+    this.isSpinner = false;
   }
 
   //2. events
@@ -237,10 +244,17 @@ class Search {
   //3. methods
   typingLogic() {
     clearTimeout(this.timerHistory);
+    // add spinner as soon as typing is done
+    if (!this.isSpinner) {
+      // add spinner as soon as typing is done
+      this.resultDiv.innerHTML = "<div class='spinner-loader'> </div>";
+      this.isSpinner = true;
+    }
     this.timerHistory = setTimeout(this.getResults.bind(this), 2000);
   }
   getResults() {
-    /* eslint-disable */console.log(...oo_oo(`86565f76_2`, 'hello world'));
+    //add the search result html structure,
+    this.resultDiv.innerHTML = "<div>Hello world</div>";
   }
   keyPressDispatcher(e) {
     // function to open or close search area on keypress for S and esc keys
@@ -248,11 +262,9 @@ class Search {
       this.openOverlay();
     }
     if (e.keyCode == 27 && this.isOpenOverlay) {
+      //for esc key
       this.closeOverlay();
     }
-
-    /* eslint-disable */
-    console.log(...oo_oo(`86565f76_3`, e.keyCode));
   }
   openOverlay() {
     this.searchOverlay.classList.add("search-overlay--active");
