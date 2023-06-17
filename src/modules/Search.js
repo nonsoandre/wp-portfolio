@@ -76,7 +76,7 @@ class Search {
     }
 
     keyPressDispatcher(e) { // function to open or close search area on keypress for S and esc keys
-        if(e.keyCode == 83 && this.isOpenOverlay == false){
+        if(e.keyCode == 83 && this.isOpenOverlay == false && $("input, textarea").is(':focus')){
             this.openOverlay();
         }
 
