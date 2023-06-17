@@ -201,24 +201,27 @@ class Search {
   constructor() {
     //get open icon element
     this.openBtn = document.querySelector("#js-search-trigger");
-    /* eslint-disable */
-    console.log(...oo_oo(`88fc8531_0`, this.openBtn));
 
     //get close icon element
     this.closeBtn = document.querySelector(".search-overlay__close");
-    /* eslint-disable */
-    console.log(...oo_oo(`88fc8531_1`, this.closeBtn));
 
     //get the parent overlay class
     this.searchOverlay = document.querySelector(".search-overlay");
     /* eslint-disable */
-    console.log(...oo_oo(`88fc8531_2`, this.searchOverlay.classList));
+    console.log(...oo_oo(`86565f76_0`, this.searchOverlay.classList));
+
+    //get search input field
+    this.searchInputField = document.querySelector("#search-term");
+    /* eslint-disable */
+    console.log(...oo_oo(`86565f76_1`, this.searchInputField));
 
     //get your events here
     this.events();
 
     //key state varianble
     this.isOpenOverlay = false;
+    //state for timeout
+    this.timerHistory;
   }
 
   //2. events
@@ -228,10 +231,17 @@ class Search {
     this.closeBtn.addEventListener("click", this.closeOverlay.bind(this));
     document.addEventListener("keydown", this.keyPressDispatcher.bind(this));
     //tiimer event
+    this.searchInputField.addEventListener("keydown", this.typingLogic.bind(this));
   }
 
   //3. methods
-  typingLogic() {}
+  typingLogic() {
+    clearTimeout(this.timerHistory);
+    this.timerHistory = setTimeout(this.getResults.bind(this), 2000);
+  }
+  getResults() {
+    /* eslint-disable */console.log(...oo_oo(`86565f76_2`, 'hello world'));
+  }
   keyPressDispatcher(e) {
     // function to open or close search area on keypress for S and esc keys
     if (e.keyCode == 83 && this.isOpenOverlay == false) {
@@ -242,7 +252,7 @@ class Search {
     }
 
     /* eslint-disable */
-    console.log(...oo_oo(`88fc8531_3`, e.keyCode));
+    console.log(...oo_oo(`86565f76_3`, e.keyCode));
   }
   openOverlay() {
     this.searchOverlay.classList.add("search-overlay--active");
