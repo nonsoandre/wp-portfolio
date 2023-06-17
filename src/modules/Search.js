@@ -15,7 +15,7 @@ class Search {
 
         //get search input field
         this.searchInputField = document.querySelector("#search-term");
-        console.log(this.searchInputField);
+        console.log(this.searchInputField.value);
 
         //get result div container
         this.resultDiv = document.querySelector(".search-overlay__results");
@@ -25,7 +25,7 @@ class Search {
 
         //get your events here
         this.events();
-
+        this.previousValue;
         //key state varianble
         this.isOpenOverlay = false;
         //state for timeout
@@ -41,25 +41,38 @@ class Search {
         this.closeBtn.addEventListener("click", this.closeOverlay.bind(this));
         document.addEventListener("keydown", this.keyPressDispatcher.bind(this));
         //tiimer event
-        this.searchInputField.addEventListener("keydown", this.typingLogic.bind(this));
+        this.searchInputField.addEventListener("keyup", this.typingLogic.bind(this));
+
     }
     
     //3. methods
     typingLogic() {
-        clearTimeout(this.timerHistory);
-        // add spinner as soon as typing is done
-        if(!this.isSpinner) {
-            // add spinner as soon as typing is done
-               this.resultDiv.innerHTML = "<div class='spinner-loader'> </div>"        
-               this.isSpinner = true;
-           } 
-        this.timerHistory = setTimeout(this.getResults.bind(this), 2000);
 
+        if(this.searchInputField.value != this.previousValue) {
+            clearTimeout(this.timerHistory);
+
+            if(this.searchInputField.value) {
+             // add spinner as soon as typing is done, the conditional prevents the spinner from running more than once as the user is manaed. This is done by creating a state to indicate when the spinner has loaded once.
+                if(!this.isSpinner) {
+                    // add spinner as soon as typing is done
+                    this.resultDiv.innerHTML = "<div class='spinner-loader'> </div>"        
+                    this.isSpinner = true;
+                } 
+                this.timerHistory = setTimeout(this.getResults.bind(this), 2000);
+            }else{
+                this.resultDiv.innerHTML = "";
+                this.isSpinner = false;
+            }
+
+        }
+        console.log(this.searchInputField.value)
+        this.previousValue = this.searchInputField.value
     }
 
     getResults(){
         //add the search result html structure,
         this.resultDiv.innerHTML = "<div>Hello world</div>";
+        this.isSpinner = false;
     }
 
     keyPressDispatcher(e) { // function to open or close search area on keypress for S and esc keys
