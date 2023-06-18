@@ -70,13 +70,21 @@ class Search {
     }
 
     getResults(){
+        $.getJSON('http://localhost/nonsoandre/wp-json/wp/v2/posts?search=' + this.searchInputField.value, data => {
+            this.resultDiv.innerHTML = `
+                <h2 class='search-overlay__section-title'> General Information </h2>
+                
+                    ${data.length ? "<ul class='link-list min-list'>" : "<h3> No information matches your search</h3>"}
+                    ${data.map(item => `<li><a href='${item.link}'>${item.title.rendered}</a><li>`).join('')}
+                    ${data.length ? "</ul>" : ""}
+            `
+        })
         //add the search result html structure,
-        this.resultDiv.innerHTML = "<div>Hello world</div>";
         this.isSpinner = false;
     }
 
     keyPressDispatcher(e) { // function to open or close search area on keypress for S and esc keys
-        if(e.keyCode == 83 && this.isOpenOverlay == false && $("input, textarea").is(':focus')){
+        if(e.keyCode == 83 && this.isOpenOverlay == false && !$("input, textarea").is(':focus')){
             this.openOverlay();
         }
 

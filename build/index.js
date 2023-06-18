@@ -208,17 +208,17 @@ class Search {
     //get the parent overlay class
     this.searchOverlay = document.querySelector(".search-overlay");
     /* eslint-disable */
-    console.log(...oo_oo(`8ea214b9_0`, this.searchOverlay.classList));
+    console.log(...oo_oo(`36dee3e_0`, this.searchOverlay.classList));
 
     //get search input field
     this.searchInputField = document.querySelector("#search-term");
     /* eslint-disable */
-    console.log(...oo_oo(`8ea214b9_1`, this.searchInputField.value));
+    console.log(...oo_oo(`36dee3e_1`, this.searchInputField.value));
 
     //get result div container
     this.resultDiv = document.querySelector(".search-overlay__results");
     /* eslint-disable */
-    console.log(...oo_oo(`8ea214b9_2`, this.resultDiv));
+    console.log(...oo_oo(`36dee3e_2`, this.resultDiv));
 
     //get your events here
     this.events();
@@ -259,17 +259,25 @@ class Search {
       }
     }
     /* eslint-disable */
-    console.log(...oo_oo(`8ea214b9_3`, this.searchInputField.value));
+    console.log(...oo_oo(`36dee3e_3`, this.searchInputField.value));
     this.previousValue = this.searchInputField.value;
   }
   getResults() {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().getJSON('http://localhost/nonsoandre/wp-json/wp/v2/posts?search=' + this.searchInputField.value, data => {
+      this.resultDiv.innerHTML = `
+                <h2 class='search-overlay__section-title'> General Information </h2>
+                
+                    ${data.length ? "<ul class='link-list min-list'>" : "<h3> No information matches your search</h3>"}
+                    ${data.map(item => `<li><a href='${item.link}'>${item.title.rendered}</a><li>`).join('')}
+                    ${data.length ? "</ul>" : ""}
+            `;
+    });
     //add the search result html structure,
-    this.resultDiv.innerHTML = "<div>Hello world</div>";
     this.isSpinner = false;
   }
   keyPressDispatcher(e) {
     // function to open or close search area on keypress for S and esc keys
-    if (e.keyCode == 83 && this.isOpenOverlay == false && jquery__WEBPACK_IMPORTED_MODULE_0___default()("input, textarea").is(':focus')) {
+    if (e.keyCode == 83 && this.isOpenOverlay == false && !jquery__WEBPACK_IMPORTED_MODULE_0___default()("input, textarea").is(':focus')) {
       this.openOverlay();
     }
     if (e.keyCode == 27 && this.isOpenOverlay) {
