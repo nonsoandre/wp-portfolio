@@ -11,6 +11,11 @@ function portfolioFiles(){
 
     wp_enqueue_script("main.js", get_theme_file_uri("/build/index.js"), array("jquery"), "1.0", true);
     wp_enqueue_style( "wp-style", get_stylesheet_uri(), NULL , "1.0", true );
+
+
+    wp_localize_script( "main.js", "site_data", array(
+        "infoSite" => get_site_url()
+    ) );
 };
 
 add_action("wp_enqueue_scripts", "portfolioFiles");

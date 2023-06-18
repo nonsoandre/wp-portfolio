@@ -70,7 +70,7 @@ class Search {
     }
 
     getResults(){
-        $.getJSON('http://localhost/nonsoandre/wp-json/wp/v2/posts?search=' + this.searchInputField.value, data => {
+        $.getJSON(site_data.mySite + 'http://localhost/nonsoandre/wp-json/wp/v2/posts?search=' + this.searchInputField.value, data => {
             this.resultDiv.innerHTML = `
                 <h2 class='search-overlay__section-title'> General Information </h2>
                 

@@ -208,17 +208,17 @@ class Search {
     //get the parent overlay class
     this.searchOverlay = document.querySelector(".search-overlay");
     /* eslint-disable */
-    console.log(...oo_oo(`36dee3e_0`, this.searchOverlay.classList));
+    console.log(...oo_oo(`745c9530_0`, this.searchOverlay.classList));
 
     //get search input field
     this.searchInputField = document.querySelector("#search-term");
     /* eslint-disable */
-    console.log(...oo_oo(`36dee3e_1`, this.searchInputField.value));
+    console.log(...oo_oo(`745c9530_1`, this.searchInputField.value));
 
     //get result div container
     this.resultDiv = document.querySelector(".search-overlay__results");
     /* eslint-disable */
-    console.log(...oo_oo(`36dee3e_2`, this.resultDiv));
+    console.log(...oo_oo(`745c9530_2`, this.resultDiv));
 
     //get your events here
     this.events();
@@ -259,11 +259,11 @@ class Search {
       }
     }
     /* eslint-disable */
-    console.log(...oo_oo(`36dee3e_3`, this.searchInputField.value));
+    console.log(...oo_oo(`745c9530_3`, this.searchInputField.value));
     this.previousValue = this.searchInputField.value;
   }
   getResults() {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default().getJSON('http://localhost/nonsoandre/wp-json/wp/v2/posts?search=' + this.searchInputField.value, data => {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().getJSON(site_data.mySite + 'http://localhost/nonsoandre/wp-json/wp/v2/posts?search=' + this.searchInputField.value, data => {
       this.resultDiv.innerHTML = `
                 <h2 class='search-overlay__section-title'> General Information </h2>
                 
